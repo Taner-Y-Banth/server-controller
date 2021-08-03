@@ -41,7 +41,7 @@ bot.on('message', async (msg) => {
 
     const message = args.join(' ');
 
-    bds.stdin.write(message + '/n')
+    bds.stdin.write(message + '\n')
 
     if (command === 'command') {
         msg.reply('One moment while I traverse the Matrix')
