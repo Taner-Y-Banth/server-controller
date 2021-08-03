@@ -21,10 +21,6 @@ const prefix = '-'
 const bot = new Discord.Client();
 const token = 'Nzg5NzMwOTI1OTQzODQ4OTkx.X92UPQ.z8uU34bSWxNxz6RwNvr7r_bfumk'
 
-bot.on('ready', () => {
-    console.log('bot is ready')
-})
-
 bot.login(token)
 
 bot.on('message', async (msg) => {
