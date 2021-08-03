@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 const { spawn } = require('child_process');
-const bds = spawn('bedrock_server', { cwd: '/home/tbryant/Desktop/Minecraft/crimsonbedrock', env: { LD_LIBRARY_PATH: '/home/tbryant/Desktop/Minecraft/crimsonbedrock' } });
+const bds = spawn('./bedrock_server', { cwd: '/home/tbryant/Desktop/Minecraft/crimsonbedrock', env: { LD_LIBRARY_PATH: '/home/tbryant/Desktop/Minecraft/crimsonbedrock' } });
 
 bds.stdin.write('hello')
 
@@ -30,7 +30,6 @@ bot.login(token)
 bot.on('message', async (msg) => {
     //if our message doesnt start with our defined prefix, dont go any further into function
     if (!msg.content.startsWith(prefix)) {
-        console.log('no prefix')
         return
     }
 
@@ -39,14 +38,10 @@ bot.on('message', async (msg) => {
 
     //splits off the first word from the array, which will be our command
     const command = args.shift().toLowerCase()
-    //log the command
-    console.log('command: ', command)
-    //log any arguments passed with a command
-    console.log(args)
 
     const message = args.join(' ');
 
-    bds.stdin.write(message)
+    bds.stdin.write(message + '/n')
 
     if (command === 'command') {
         msg.reply('One moment while I traverse the Matrix')
