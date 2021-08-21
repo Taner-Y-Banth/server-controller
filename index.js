@@ -46,7 +46,7 @@ bot.on('message', async (msg) => {
     }
     if (command === 'home') {
         msg.reply('One moment well I walk back home')
-        bds.stdin.write('tp' + altaccount + '-4212 225 -2810' + '\n')
+        bds.stdin.write('tp ' + altaccount + ' -4212 225 -2810' + '\n')
     }
 })
 
