@@ -39,8 +39,14 @@ bot.on('message', async (msg) => {
 
     bds.stdin.write(message + '\n')
 
+    const altaccount = '"Camera Man 3000"'
+
     if (command === 'command') {
         msg.reply('One moment while I traverse the Matrix')
+    }
+    if (command === 'home') {
+        msg.reply('One moment well I walk back home')
+        bds.stdin.write('tp' + altaccount + '-4212 225 -2810' + '\n')
     }
 })
 
