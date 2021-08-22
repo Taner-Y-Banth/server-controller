@@ -48,5 +48,9 @@ bot.on('message', async (msg) => {
         msg.reply('One moment well I walk back home')
         bds.stdin.write('tp' + altaccount + '-4212 225 -2810' + '\n')
     }
+    if (command === 'gaurdian') {
+        msg.reply('One moment well I walk back home')
+        bds.stdin.write('tp' + altaccount + ' -201 121 663' + '\n')
+    }
 })
 
