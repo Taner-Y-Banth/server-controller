@@ -45,12 +45,16 @@ bot.on('message', async (msg) => {
         msg.reply('One moment while I traverse the Matrix')
     }
     if (command === 'home') {
-        msg.reply('One moment well I walk back home')
+        msg.reply('One moment while I walk back home')
         bds.stdin.write('tp ' + altaccount + ' -4212 225 -2810' + '\n')
     }
     if (command === 'gaurdian') {
-        msg.reply('One moment well I walk back home')
+        msg.reply('I need to summon a protector')
         bds.stdin.write('tp' + altaccount + ' -201 121 663' + '\n')
+    }
+    if (command === 'iron') {
+        msg.reply('Smithing is something that I love')
+        bds.stdin.write('tp' + altaccount + ' -136 130 904' + '\n')
     }
 })
 
