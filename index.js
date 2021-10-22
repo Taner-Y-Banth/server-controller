@@ -52,9 +52,9 @@ bot.on('message', async (msg) => {
         msg.reply('I need to summon a protector')
         bds.stdin.write('tp' + altaccount + ' 2565 12 -570' + '\n')
     }
-    // if (command === 'iron') {
-    //     msg.reply('Smithing is something that I love')
-    //     bds.stdin.write('tp' + altaccount + ' -136 130 904' + '\n')
-    // }
+    if (command === 'iron') {
+        msg.reply('Smithing is something that I love')
+        bds.stdin.write('tp' + altaccount + ' 1176 112 -584' + '\n')
+    }
 })
 
