@@ -19,7 +19,7 @@ bds.on(' ', (code) => {
 
 const prefix = '-'
 const bot = new Discord.Client();
-const token = 'Nzg5NzMwOTI1OTQzODQ4OTkx.X92UPQ.z8uU34bSWxNxz6RwNvr7r_bfumk'
+const token = 'Nzg5NzMwOTI1OTQzODQ4OTkx.X92UPQ.ViiWLBoM2aJJ00cxaXMHgwDGW08'
 
 bot.login(token)
 
