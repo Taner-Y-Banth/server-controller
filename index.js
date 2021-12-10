@@ -50,7 +50,7 @@ bot.on('message', async (msg) => {
     }
     if (command === 'gaurdian') {
         msg.reply('Time to summon a protector')
-        bds.stdin.write('tp' + altaccount + ' 3866 92 -2592' + '\n')
+        bds.stdin.write('tp' + altaccount + ' 3866 92 2592' + '\n')
     }
     if (command === 'gunpowder') {
         msg.reply('Would you like to ignite some TNT?')
