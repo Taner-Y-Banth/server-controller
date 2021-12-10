@@ -46,7 +46,7 @@ bot.on('message', async (msg) => {
     }
     if (command === 'home') {
         msg.reply('One moment while I walk back home')
-        bds.stdin.write('pt ' + altaccount + ' -4212 225 -2810' + '\n')
+        bds.stdin.write('tp ' + altaccount + ' -4212 225 -2810' + '\n')
     }
     if (command === 'gaurdian') {
         msg.reply('Time to summon a protector')
