@@ -54,7 +54,7 @@ bot.on('message', async (msg) => {
     }
     if (command === 'gunpowder') {
         msg.reply('Would you like to ignite some TNT?')
-        bds.stdin.write('tp' + altaccount + ' 2783 200 3087' + '\n')
+        bds.stdin.write('tp' + altaccount + ' 2778 200 3083' + '\n')
     }
 })
 
