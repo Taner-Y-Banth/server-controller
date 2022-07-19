@@ -66,6 +66,10 @@ bot.on('message', async (msg) => {
         msg.reply('Meow, meow, meowww...')
         bds.stdin.write('tp' + altaccount + ' -648 65 3852' + '\n')
     }
+    if (command === 'shulker') {
+        msg.reply('UNLITED STORAGE!!!')
+        bds.stdin.write('tp' + altaccount + ' @e[name=endshulk]' + '\n')
+    }
 })
 
 
