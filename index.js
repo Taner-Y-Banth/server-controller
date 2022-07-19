@@ -52,7 +52,7 @@ bot.on('message', async (msg) => {
     }
     if (command === 'home') {
         msg.reply('One moment while I walk back home')
-        bds.stdin.write('tp ' + altaccount + ' -4212 225 -2810' + '\n')
+        bds.stdin.write('tp ' + altaccount + ' 710 46 1940' + '\n')
     }
     if (command === 'raid') {
         msg.reply('Need some emeralds, or maybe some redstone?')
