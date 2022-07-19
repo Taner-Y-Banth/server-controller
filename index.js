@@ -40,7 +40,13 @@ bot.on('message', async (msg) => {
     bds.stdin.write(message + '\n')
 
     const altaccount = '"Camera Man 3000"'
+// switch(command){
+//     'command':
+//     msg.reply('One moment while I traverse the Matrix')
+//     break
+//     ''
 
+// }
     if (command === 'command') {
         msg.reply('One moment while I traverse the Matrix')
     }
@@ -48,13 +54,17 @@ bot.on('message', async (msg) => {
         msg.reply('One moment while I walk back home')
         bds.stdin.write('tp ' + altaccount + ' -4212 225 -2810' + '\n')
     }
-    if (command === 'gaurdian') {
-        msg.reply('Time to summon a protector')
-        bds.stdin.write('tp' + altaccount + ' 3866 92 2952' + '\n')
+    if (command === 'raid') {
+        msg.reply('Need some emeralds, or maybe some redstone?')
+        bds.stdin.write('tp' + altaccount + ' 655 150 2876' + '\n')
     }
     if (command === 'gunpowder') {
         msg.reply('Would you like to ignite some TNT?')
-        bds.stdin.write('tp' + altaccount + ' 2778 200 3083' + '\n')
+        bds.stdin.write('tp' + altaccount + ' -1352 216 4599' + '\n')
+    }
+    if (command === 'iron') {
+        msg.reply('Meow, meow, meowww...')
+        bds.stdin.write('tp' + altaccount + ' -648 65 3852' + '\n')
     }
 })
 
