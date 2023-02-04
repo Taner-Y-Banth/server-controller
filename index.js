@@ -37,39 +37,66 @@ bot.on('message', async (msg) => {
 
     const message = args.join(' ');
 
+    const overworldTp = 'tp';
+    const netherTp = 'execute in nether run tp';
+    const endTp = 'execute in nether run tp';
+
     bds.stdin.write(message + '\n')
 
     const altaccount = '"Camera Man 3000"'
-// switch(command){
-//     'command':
-//     msg.reply('One moment while I traverse the Matrix')
-//     break
-//     ''
 
-// }
-    if (command === 'command') {
-        msg.reply('One moment while I traverse the Matrix')
+    switch (command) {
+        case 'command':
+            msg.reply('One moment while I traverse the Matrix');
+            break;
+        case 'tpalt_o':
+            msg.reply('Your wish is my command');
+            bds.stdin.write(`${overworldTp} ${altaccount} ${message}\n`);
+            break;
+        case 'tpalt_n':
+            msg.reply('Your wish is my command');
+            bds.stdin.write(`${netherTp} ${altaccount} ${message}\n`);
+            break;
+        case 'tpalt_e':
+            msg.reply('Your wish is my command');
+            bds.stdin.write(`${endTp} ${altaccount} ${message}\n`);
+            break;
+        case 'tpalt':
+            msg.reply('Your wish is my command');
+            bds.stdin.write(`${overworldTp} ${altaccount} ${message}\n`);
+            break;
+        case 'home':
+            msg.reply('One moment while I walk back home');
+            bds.stdin.write(`${overworldTp} ${altaccount} 710 46 1940\n`);
+            break;
+        case 'raid':
+            msg.reply('Need some emeralds, or maybe some redstone?');
+            bds.stdin.write(`${overworldTp} ${altaccount} 655 150 2876\n`);
+            break;
+        case 'gunpowder':
+            msg.reply('Would you like to ignite some TNT?');
+            bds.stdin.write(`${overworldTp} ${altaccount} -1352 216 4599\n`);
+            break;
+        case 'iron':
+            msg.reply('Meow, meow, meowww...');
+            bds.stdin.write(`${overworldTp} ${altaccount} -648 65 3852\n`);
+            break;
+        case 'shulker':
+            msg.reply('UNLIMITED STORAGE!!!');
+            bds.stdin.write(`${endTp} ${altaccount} 1041.0 133 574.0\n`);
+            break;
+        case 'gold':
+            msg.reply('Oink, oink, swords galore');
+            bds.stdin.write(`${overworldTp} ${altaccount} 32.0 84 2736.0\n`);
+            break;
+        case 'fortress':
+            msg.reply('Farming wither skeletons in Minecraft is a skeleton of a job, but someone has got to do it');
+            bds.stdin.write(`${netherTp} ${altaccount} -197 67 1614\n`);
+            break;
+        default:
+            break;
     }
-    if (command === 'home') {
-        msg.reply('One moment while I walk back home')
-        bds.stdin.write('tp ' + altaccount + ' 710 46 1940' + '\n')
-    }
-    if (command === 'raid') {
-        msg.reply('Need some emeralds, or maybe some redstone?')
-        bds.stdin.write('tp' + altaccount + ' 655 150 2876' + '\n')
-    }
-    if (command === 'gunpowder') {
-        msg.reply('Would you like to ignite some TNT?')
-        bds.stdin.write('tp' + altaccount + ' -1352 216 4599' + '\n')
-    }
-    if (command === 'iron') {
-        msg.reply('Meow, meow, meowww...')
-        bds.stdin.write('tp' + altaccount + ' -648 65 3852' + '\n')
-    }
-    if (command === 'shulker') {
-        msg.reply('UNLITED STORAGE!!!')
-        bds.stdin.write('tp' + altaccount + ' @e[name=endshulk]' + '\n')
-    }
+
 })
 
 
