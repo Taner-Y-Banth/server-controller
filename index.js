@@ -39,7 +39,7 @@ bot.on('message', async (msg) => {
 
     const overworldTp = 'tp';
     const netherTp = 'execute in nether run tp';
-    const endTp = 'execute in nether run tp';
+    const endTp = 'execute in the_end run tp';
 
     bds.stdin.write(message + '\n')
 
