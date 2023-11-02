@@ -1,0 +1,77 @@
+[
+    {
+        "name": "removecommand",
+        "description": "Remove a custom command",
+        "action": "(message, args) => {\n    const commandName = args[0];\n\n    const index = commands.findIndex((cmd) => cmd.name === commandName);\n    if (index !== -1) {\n        commands.splice(index, 1);\n        message.reply(`Command '${commandName}' removed.`);\n        fs.writeFileSync(commandsFile, JSON.stringify(commands, null, 4));\n    } else {\n        message.reply(`Command '${commandName}' not found.`);\n    }\n}"
+    },
+    {
+        "name": "addcommand",
+        "description": "Add a new custom command",
+        "action": "(message, args) => {\n    const input = args.join(' ');\n    const [newCommand, descriptionAction] = input.split('|').map((item) => item.trim());\n\n    if (newCommand and descriptionAction) {\n        const [newDescription, newAction] = descriptionAction.split(' ').map((item) => item.trim());\n\n        // Check if the new command doesn't already exist\n        if (!commands.some((cmd) => cmd.name === newCommand)) {\n            commands.push({\n                name: newCommand,\n                description: newDescription,\n                action: () => {\n                    bds.stdin.write(`${overworldTp} ${altaccount} ${newAction}\\n`);\n                    message.reply(newDescription);\n                },\n            });\n            message.reply(`New command '${newCommand}' added.`);\n        } else {\n            message.reply(`Command '${newCommand}' already exists.`);\n        }\n    } else {\n        message.reply('Invalid input format. Please use: -addcommand [name] [description] | [action]');\n    }\n}"
+    },
+    {
+        "name": "addcommand_n",
+        "description": "Add a new custom command",
+        "action": "(message, args) => {\n    const input = args.join(' ');\n    const [newCommand, descriptionAction] = input.split('|').map((item) => item.trim());\n\n    if (newCommand and descriptionAction) {\n        const [newDescription, newAction] = descriptionAction.split(' ').map((item) => item.trim());\n\n        // Check if the new command doesn't already exist\n        if (!commands.some((cmd) => cmd.name === newCommand)) {\n            commands.push({\n                name: newCommand,\n                description: newDescription,\n                action: () => {\n                    bds.stdin.write(`${netherTp} ${altaccount} ${newAction}\\n`);\n                    message.reply(newDescription);\n                },\n            });\n            message.reply(`New command '${newCommand}' added.`);\n        } else {\n            message.reply(`Command '${newCommand}' already exists.`);\n        }\n    } else {\n        message.reply('Invalid input format. Please use: -addcommand [name] [description] | [action]');\n    }\n}"
+    },
+    {
+        "name": "addcommand_e",
+        "description": "Add a new custom command",
+        "action": "(message, args) => {\n    const input = args.join(' ');\n    const [newCommand, descriptionAction] = input.split('|').map((item) => item.trim());\n\n    if (newCommand and descriptionAction) {\n        const [newDescription, newAction] = descriptionAction.split(' ').map((item) => item.trim());\n\n        // Check if the new command doesn't already exist\n        if (!commands.some((cmd) => cmd.name === newCommand)) {\n            commands.push({\n                name: newCommand,\n                description: newDescription,\n                action: () => {\n                    bds.stdin.write(`${endTp} ${altaccount} ${newAction}\\n`);\n                    message.reply(newDescription);\n                },\n            });\n            message.reply(`New command '${newCommand}' added.`);\n        } else {\n            message.reply(`Command '${newCommand}' already exists.`);\n        }\n    } else {\n        message.reply('Invalid input format. Please use: -addcommand [name] [description] | [action]');\n    }\n}"
+    },
+    {
+        "name": "command",
+        "description": "One moment while I traverse the Matrix",
+        "action": "(message) => message.reply('One moment while I traverse the Matrix')"
+    },
+    {
+        "name": "tpalt_o",
+        "description": "Your wish is my command",
+        "action": "(message, args) => {\n    bds.stdin.write(`${overworldTp} ${altaccount} ${args.join(' ')}\\n`);\n    message.reply('Your wish is my command');\n}"
+    },
+    {
+        "name": "tpalt_n",
+        "description": "Your wish is my command",
+        "action": "(message, args) => {\n    bds.stdin.write(`${netherTp} ${altaccount} ${args.join(' ')}\\n`);\n    message.reply('Your wish is my command');\n}"
+    },
+    {
+        "name": "tpalt_e",
+        "description": "Your wish is my command",
+        "action": "(message, args) => {\n    bds.stdin.write(`${endTp} ${altaccount} ${args.join(' ')}\\n`);\n    message.reply('Your wish is my command');\n}"
+    },
+    {
+        "name": "home",
+        "description": "One moment while I walk back home",
+        "action": "(message) => {\n    bds.stdin.write(`${overworldTp} ${altaccount} 710 46 1940\\n`);\n    message.reply('One moment while I walk back home');\n}"
+    },
+    {
+        "name": "raid",
+        "description": "Need some emeralds, or maybe some redstone?",
+        "action": "(message) => {\n    bds.stdin.write(`${overworldTp} ${altaccount} 655 150 2876\\n`);\n    message.reply('Need some emeralds, or maybe some redstone?');\n}"
+    },
+    {
+        "name": "gunpowder",
+        "description": "Would you like to ignite some TNT?",
+        "action": "(message) => {\n    bds.stdin.write(`${overworldTp} ${altaccount} -1352 216 4599\\n`);\n    message.reply('Would you like to ignite some TNT?');\n}"
+    },
+    {
+        "name": "shulker",
+        "description": "UNLIMITED STORAGE!!!",
+        "action": "(message) => {\n    bds.stdin.write(`${endTp} ${altaccount} 1041.0 133 574.0\\n`);\n    message.reply('UNLIMITED STORAGE!!!');\n}"
+    },
+    {
+        "name": "iron",
+        "description": "Meow, meow, meowww...",
+        "action": "(message) => {\n    bds.stdin.write(`${overworldTp} ${altaccount} -648 65 3852\\n`);\n    message.reply('Meow, meow, meowww...');\n}"
+    },
+    {
+        "name": "fortress",
+        "description": "Farming wither skeletons in Minecraft is a skeleton of a job, but someone has got to do it",
+        "action": "(message) => {\n    bds.stdin.write(`${netherTp} ${altaccount} -197 67 1614\\n`);\n    message.reply('Farming wither skeletons in Minecraft is a skeleton of a job, but someone has got to do it');\n}"
+    },
+    {
+        "name": "gold",
+        "description": "Oink, oink, swords galore",
+        "action": "(message) => {\n    bds.stdin.write(`${overworldTp} ${altaccount} 32.0 84 2736.0\\n`);\n    message.reply('Oink, oink, swords galore');\n}"
+    }
+]
