@@ -82,8 +82,7 @@ bot.on('message', async (msg) => {
             msg.reply('Your wish is my command');
             bds.stdin.write(`${overworldTp} ${altaccount} ${message}\n`);
             break;
-        case 'removecommand':
-            // Implement the removecommand action here
+        case 'remove':
             const commandNameToRemove = args[0];
             const indexToRemove = commands.findIndex((cmd) => cmd.name === commandNameToRemove);
             if (indexToRemove !== -1) {
@@ -97,10 +96,6 @@ bot.on('message', async (msg) => {
         case 'add':
         case 'add_n':
         case 'add_e':
-            // Implement the addcommand, addcommand_n, and addcommand_e actions here
-
-
-
             const input = args.join(' ');
             const [newCommand, descriptionCoordinates] = input.split('|').map((item) => item.trim());
             const [newDescription, coordinates] = descriptionCoordinates.split('/').map((item) => item.trim());
