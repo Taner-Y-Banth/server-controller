@@ -94,23 +94,26 @@ bot.on('message', async (msg) => {
                 msg.reply(`Command '${commandNameToRemove}' not found.`);
             }
             break;
-        case 'addcommand':
-        case 'addcommand_n':
-        case 'addcommand_e':
+        case 'add':
+        case 'add_n':
+        case 'add_e':
             // Implement the addcommand, addcommand_n, and addcommand_e actions here
+
+
+
             const input = args.join(' ');
-            const [newCommand, descriptionAction] = input.split('|').map((item) => item.trim());
-            if (newCommand && descriptionAction) {
-                const [newDescription, coordinates] = descriptionAction.split(' ').map((item) => item.trim());
+            const [newCommand, descriptionCoordinates] = input.split('|').map((item) => item.trim());
+            const [newDescription, coordinates] = descriptionCoordinates.split('/').map((item) => item.trim());
+            if (newCommand && descriptionCoordinates && coordinates) {
                 let tpDetails = '';
 
                 // Check if the new command doesn't already exist
                 if (!commands.some((cmd) => cmd.name === newCommand)) {
-                    if (command === 'addcommand') {
+                    if (command === 'add') {
                         tpDetails = `overworld, ${coordinates}`
-                    } else if (command === 'addcommand_n') {
+                    } else if (command === 'add_n') {
                         tpDetails = `nether, ${coordinates}`
-                    } else if (command === 'addcommand_e') {
+                    } else if (command === 'add_e') {
                         tpDetails = `the_end, ${coordinates}`
                     }
 
@@ -126,7 +129,7 @@ bot.on('message', async (msg) => {
                     msg.reply(`Command '${newCommand}' already exists.`);
                 }
             } else {
-                msg.reply('Invalid input format. Please use: -addcommand [name] [description] | [action]');
+                msg.reply('Invalid input format. Please use: -addcommand [name] | [description] / [action]');
             }
             break;
         case 'savecommands':
