@@ -88,10 +88,10 @@ bot.on('message', async (msg) => {
             const indexToRemove = commands.findIndex((cmd) => cmd.name === commandNameToRemove);
             if (indexToRemove !== -1) {
                 commands.splice(indexToRemove, 1);
-                message.reply(`Command '${commandNameToRemove}' removed.`);
+                msg.reply(`Command '${commandNameToRemove}' removed.`);
                 fs.writeFileSync(commandsFile, JSON.stringify(commands, null, 4));
             } else {
-                message.reply(`Command '${commandNameToRemove}' not found.`);
+                msg.reply(`Command '${commandNameToRemove}' not found.`);
             }
             break;
         case 'addcommand':
@@ -102,15 +102,16 @@ bot.on('message', async (msg) => {
             const [newCommand, descriptionAction] = input.split('|').map((item) => item.trim());
             if (newCommand && descriptionAction) {
                 const [newDescription, coordinates] = descriptionAction.split(' ').map((item) => item.trim());
+                let tpDetails = '';
 
                 // Check if the new command doesn't already exist
                 if (!commands.some((cmd) => cmd.name === newCommand)) {
                     if (command === 'addcommand') {
-                        const tpDetails = `overworld, ${coordinates}`
+                        tpDetails = `overworld, ${coordinates}`
                     } else if (command === 'addcommand_n') {
-                        const tpDetails = `nether, ${coordinates}`
+                        tpDetails = `nether, ${coordinates}`
                     } else if (command === 'addcommand_e') {
-                        const tpDetails = `the_end, ${coordinates}`
+                        tpDetails = `the_end, ${coordinates}`
                     }
 
                     commands.push({
@@ -119,13 +120,13 @@ bot.on('message', async (msg) => {
                         action: tpDetails,
                     });
 
-                    message.reply(`New command '${newCommand}' added.`);
+                    msg.reply(`New command '${newCommand}' added.`);
                     fs.writeFileSync(commandsFile, JSON.stringify(commands, null, 4));
                 } else {
-                    message.reply(`Command '${newCommand}' already exists.`);
+                    msg.reply(`Command '${newCommand}' already exists.`);
                 }
             } else {
-                message.reply('Invalid input format. Please use: -addcommand [name] [description] | [action]');
+                msg.reply('Invalid input format. Please use: -addcommand [name] [description] | [action]');
             }
             break;
         case 'savecommands':
