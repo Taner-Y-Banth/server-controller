@@ -1,14 +1,14 @@
 const Discord = require("discord.js");
 const fs = require('fs');
 const { spawn } = require('child_process');
-const config = require('./config'); // Separate configuration file
+const config = require('/home/tbryant/Desktop/server-controller/config'); // Separate configuration file
 
 // Constants
 const overworldTp = 'tp';
 const netherTp = 'execute in nether run tp';
 const endTp = 'execute in the_end run tp';
 const altaccount = '"Camera Man 3000"';
-const commandsFile = 'commands.json'; // JSON file to store custom commands
+const commandsFile = config.commandsPath; // JSON file to store custom commands
 
 const bds = spawn('./bedrock_server', {
     cwd: config.serverDirectory,
