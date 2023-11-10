@@ -179,7 +179,7 @@ function listCommands(msg) {
 
     // Add commands from index.js
     response += 'Commands from index.js:\n';
-    response += '1. `-command`: Traverses the Matrix.\n';
+    response += '1. `-command [any in game command]`: Traverses the Matrix.\n';
     response += '2. `-tpalt_o`: Teleports the alternative account to the specified location in the Overworld.\n';
     response += '3. `-tpalt_n`: Teleports the alternative account to the specified location in the Nether.\n';
     response += '4. `-tpalt_e`: Teleports the alternative account to the specified location in the End.\n';
