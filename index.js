@@ -136,7 +136,7 @@ bot.on('message', async (msg) => {
                 msg.reply('An error occurred while saving custom commands.');
             }
             break;
-        case 'listcommands':
+        case 'list':
             listCommands(msg);
             break;
         default:
