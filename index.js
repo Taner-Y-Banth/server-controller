@@ -193,7 +193,7 @@ function listCommands(msg) {
     // Add commands from commands.json
     response += 'Commands from commands.json:\n';
     commands.forEach((cmd) => {
-        response += `${cmd.name}: ${cmd.description}\n`;
+        response += `${cmd.name}: ${cmd.description} | ${cmd.action}\n`;
     });
 
     msg.reply(response);
