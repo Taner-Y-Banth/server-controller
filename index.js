@@ -136,9 +136,9 @@ bot.on('message', async (msg) => {
                 msg.reply('An error occurred while saving custom commands.');
             }
             break;
-            case 'listcommands':
-                listCommands(msg);
-                break;
+        case 'listcommands':
+            listCommands(msg);
+            break;
         default:
             // Check if it's a custom command and execute it
             if (commands.some(cmd => cmd.name === command)) {
