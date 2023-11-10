@@ -1,9 +1,19 @@
 const Discord = require("discord.js");
-
+const fs = require('fs');
 const { spawn } = require('child_process');
-const bds = spawn('./bedrock_server', { cwd: '/home/tbryant/Desktop/Minecraft/crimsonbedrock', env: { LD_LIBRARY_PATH: '/home/tbryant/Desktop/Minecraft/crimsonbedrock' } });
+const config = require('/home/tbryant/Desktop/server-controller/config'); // Separate configuration file
 
-bds.stdin.write('hello')
+// Constants
+const overworldTp = 'tp';
+const netherTp = 'execute in nether run tp';
+const endTp = 'execute in the_end run tp';
+const altaccount = '"Camera Man 3000"';
+const commandsFile = config.commandsPath; // JSON file to store custom commands
+
+const bds = spawn('./bedrock_server', {
+    cwd: config.serverDirectory,
+    env: { LD_LIBRARY_PATH: config.libraryPath }
+});
 
 bds.stdout.on('data', (data) => {
     console.log(`${data}`);
@@ -17,33 +27,40 @@ bds.on(' ', (code) => {
     console.log(`child process exited with code ${code}`);
 });
 
-const prefix = '-'
+const prefix = config.prefix;
 const bot = new Discord.Client();
-const token = 'Nzg5NzMwOTI1OTQzODQ4OTkx.X92UPQ.WyLvRS2CXl1NeUKPc-kulnSdA8A'
+const token = config.discordBotToken;
 
 bot.login(token)
 
+// Function to load custom commands from the JSON file
+function loadCommands() {
+    try {
+        const data = fs.readFileSync(commandsFile, 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('Error loading custom commands from JSON file:', error);
+        return [];
+    }
+}
+
+let commands = loadCommands();
+
 bot.on('message', async (msg) => {
-    //if our message doesnt start with our defined prefix, dont go any further into function
+    // If our message doesn't start with our defined prefix, don't go any further into the function
     if (!msg.content.startsWith(prefix)) {
-        return
+        return;
     }
 
-    //slices off prefix from our message, then trims extra whitespace, then returns our array of words from the message
-    const args = msg.content.slice(prefix.length).trim().split(' ')
+    // Slices off prefix from our message, then trims extra whitespace, then returns our array of words from the message
+    const args = msg.content.slice(prefix.length).trim().split(' ');
 
-    //splits off the first word from the array, which will be our command
-    const command = args.shift().toLowerCase()
+    // Splits off the first word from the array, which will be our command
+    const command = args.shift().toLowerCase();
 
     const message = args.join(' ');
 
-    const overworldTp = 'tp';
-    const netherTp = 'execute in nether run tp';
-    const endTp = 'execute in the_end run tp';
-
-    bds.stdin.write(message + '\n')
-
-    const altaccount = '"Camera Man 3000"'
+    bds.stdin.write(message + '\n');
 
     switch (command) {
         case 'command':
@@ -65,39 +82,91 @@ bot.on('message', async (msg) => {
             msg.reply('Your wish is my command');
             bds.stdin.write(`${overworldTp} ${altaccount} ${message}\n`);
             break;
-        case 'home':
-            msg.reply('One moment while I walk back home');
-            bds.stdin.write(`${overworldTp} ${altaccount} 710 46 1940\n`);
+        case 'remove':
+            const commandNameToRemove = args[0];
+            const indexToRemove = commands.findIndex((cmd) => cmd.name === commandNameToRemove);
+            if (indexToRemove !== -1) {
+                commands.splice(indexToRemove, 1);
+                msg.reply(`Command '${commandNameToRemove}' removed.`);
+                fs.writeFileSync(commandsFile, JSON.stringify(commands, null, 4));
+            } else {
+                msg.reply(`Command '${commandNameToRemove}' not found.`);
+            }
             break;
-        case 'raid':
-            msg.reply('Need some emeralds, or maybe some redstone?');
-            bds.stdin.write(`${overworldTp} ${altaccount} 655 150 2876\n`);
+        case 'add':
+        case 'add_n':
+        case 'add_e':
+            const input = args.join(' ');
+            const [newCommand, descriptionCoordinates] = input.split('|').map((item) => item.trim());
+            const [newDescription, coordinates] = descriptionCoordinates.split('/').map((item) => item.trim());
+            if (newCommand && descriptionCoordinates && coordinates) {
+                let tpDetails = '';
+
+                // Check if the new command doesn't already exist
+                if (!commands.some((cmd) => cmd.name === newCommand)) {
+                    if (command === 'add') {
+                        tpDetails = `overworld, ${coordinates}`
+                    } else if (command === 'add_n') {
+                        tpDetails = `nether, ${coordinates}`
+                    } else if (command === 'add_e') {
+                        tpDetails = `the_end, ${coordinates}`
+                    }
+
+                    commands.push({
+                        name: newCommand,
+                        description: newDescription,
+                        action: tpDetails,
+                    });
+
+                    msg.reply(`New command '${newCommand}' added.`);
+                    fs.writeFileSync(commandsFile, JSON.stringify(commands, null, 4));
+                } else {
+                    msg.reply(`Command '${newCommand}' already exists.`);
+                }
+            } else {
+                msg.reply('Invalid input format. Please use: -addcommand [name] | [description] / [action]');
+            }
             break;
-        case 'gunpowder':
-            msg.reply('Would you like to ignite some TNT?');
-            bds.stdin.write(`${overworldTp} ${altaccount} -1352 216 4599\n`);
-            break;
-        case 'iron':
-            msg.reply('Meow, meow, meowww...');
-            bds.stdin.write(`${overworldTp} ${altaccount} -648 65 3852\n`);
-            break;
-        case 'shulker':
-            msg.reply('UNLIMITED STORAGE!!!');
-            bds.stdin.write(`${endTp} ${altaccount} 1041.0 133 574.0\n`);
-            break;
-        case 'gold':
-            msg.reply('Oink, oink, swords galore');
-            bds.stdin.write(`${overworldTp} ${altaccount} 32.0 84 2736.0\n`);
-            break;
-        case 'fortress':
-            msg.reply('Farming wither skeletons in Minecraft is a skeleton of a job, but someone has got to do it');
-            bds.stdin.write(`${netherTp} ${altaccount} -197 67 1614\n`);
+        case 'savecommands':
+            try {
+                fs.writeFileSync(commandsFile, JSON.stringify(commands, null, 4));
+                msg.reply('Custom commands have been saved.');
+            } catch (error) {
+                console.error('Error saving custom commands to JSON file:', error);
+                msg.reply('An error occurred while saving custom commands.');
+            }
             break;
         default:
+            // Check if it's a custom command and execute it
+            if (commands.some(cmd => cmd.name === command)) {
+                executeCustomCommand(command, msg, bds, commands);
+            } else {
+                msg.reply('Command not found.');
+            }
             break;
     }
+});
 
-})
+// Function to execute custom commands based on the command name
+function executeCustomCommand(commandName, msg, bds, commands) {
+    const command = commands.find(cmd => cmd.name === commandName);
+    if (command) {
+        const [dimension, coords] = command.action.split(', ').map(item => item.trim());
+        msg.reply(command.description);
+        bds.stdin.write(`${getDimensionTp(dimension)} ${altaccount} ${coords}\n`);
+    }
+}
 
-
-
+// Helper function to get the appropriate dimension TP command
+function getDimensionTp(dimension) {
+    switch (dimension) {
+        case 'overworld':
+            return overworldTp;
+        case 'nether':
+            return netherTp;
+        case 'the_end':
+            return endTp;
+        default:
+            return '';
+    }
+}

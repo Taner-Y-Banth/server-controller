@@ -1,0 +1,37 @@
+[
+    {
+        "name": "home",
+        "description": "One moment while I walk back home",
+        "action": "overworld, 710 46 1940"
+    },
+    {
+        "name": "raid",
+        "description": "Need some emeralds, or maybe some redstone?",
+        "action": "overworld, 655 150 2876"
+    },
+    {
+        "name": "gunpowder",
+        "description": "Would you like to ignite some TNT?",
+        "action": "overworld, -1352 216 4599"
+    },
+    {
+        "name": "iron",
+        "description": "Meow, meow, meowww...",
+        "action": "overworld, -648 65 3852"
+    },
+    {
+        "name": "shulker",
+        "description": "UNLIMITED STORAGE!!!",
+        "action": "the_end, 1041.0 133 574.0"
+    },
+    {
+        "name": "gold",
+        "description": "Oink, oink, swords galore",
+        "action": "overworld, 32.0 84 2736.0"
+    },
+    {
+        "name": "fortress",
+        "description": "Farming wither skeletons in Minecraft is a skeleton of a job, but someone has got to do it",
+        "action": "nether, -197 67 1614"
+    }
+]
