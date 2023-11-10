@@ -136,6 +136,9 @@ bot.on('message', async (msg) => {
                 msg.reply('An error occurred while saving custom commands.');
             }
             break;
+            case 'listcommands':
+                listCommands(msg);
+                break;
         default:
             // Check if it's a custom command and execute it
             if (commands.some(cmd => cmd.name === command)) {
@@ -169,4 +172,29 @@ function getDimensionTp(dimension) {
         default:
             return '';
     }
+}
+
+function listCommands(msg) {
+    let response = 'Here are the available commands and their usage:\n\n';
+
+    // Add commands from index.js
+    response += 'Commands from index.js:\n';
+    response += '1. `command`: Traverses the Matrix.\n';
+    response += '2. `tpalt_o`: Teleports the alternative account to the specified location in the Overworld.\n';
+    response += '3. `tpalt_n`: Teleports the alternative account to the specified location in the Nether.\n';
+    response += '4. `tpalt_e`: Teleports the alternative account to the specified location in the End.\n';
+    response += '5. `tpalt`: Teleports the alternative account to the specified location in the Overworld.\n';
+    response += '6. `remove [name]`: Removes a custom command.\n';
+    response += '7. `add [name] | [description] / [coordinates]`: Adds a new custom command for the Overworld.\n';
+    response += '8. `add_n [name] | [description] / [coordinates]`: Adds a new custom command for the Nether.\n';
+    response += '9. `add_e [name] | [description] / [coordinates]`: Adds a new custom command for the End.\n';
+    response += '10. `savecommands`: Saves the current list of custom commands to the JSON file.\n\n';
+
+    // Add commands from commands.json
+    response += 'Commands from commands.json:\n';
+    commands.forEach((cmd) => {
+        response += `${cmd.name}: ${cmd.description}\n`;
+    });
+
+    msg.reply(response);
 }
