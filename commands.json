@@ -33,5 +33,15 @@
         "name": "fortress",
         "description": "Farming wither skeletons in Minecraft is a skeleton of a job, but someone has got to do it",
         "action": "nether, -197 67 1614"
+    },
+    {
+        "name": "sand",
+        "description": "It's dry as a desert at my place, wanna come inside?",
+        "action": "the_end, -70 60 1"
+    },
+    {
+        "name": "barter",
+        "description": "Where'd all the gold go?",
+        "action": "overworld, 383 81 2691"
     }
 ]
